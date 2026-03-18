@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Redirecting...</title></head>
+<body>
+<script>
+  // Grab the token from the URL hash and send it back to the opener window
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  const token = params.get('access_token');
+  if (token && window.opener) {
+    window.opener.postMessage({ twitchToken: token }, '*');
+    window.close();
+  } else {
+    document.body.innerText = 'Something went wrong. You can close this tab.';
+  }
+</script>
+</body>
+</html>
